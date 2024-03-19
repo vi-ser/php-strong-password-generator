@@ -1,17 +1,7 @@
 <?php 
 $passwordLength = isset($_GET['password-length']) ? $_GET['password-length'] : 8;
 
-function passwordGeneration($length) {
-    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+,-./:;=?@[\]^_{|}~';
-    $password = '';
-    $charactersLength = strlen($characters);
-    for ($i = 0; $i < $length; $i++) {
-        $password .= $characters[random_int(0, $charactersLength - 1)];
-    }
-
-    return $password;
-
-}
+include './functions.php'
 ?>
 
 <!DOCTYPE html>
