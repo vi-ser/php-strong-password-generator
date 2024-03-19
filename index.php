@@ -1,3 +1,19 @@
+<?php 
+$passwordLength = isset($_GET['password-length']) ? $_GET['password-length'] : 8;
+
+function passwordGeneration($length) {
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&()*+,-./:;=?@[\]^_{|}~';
+    $password = '';
+    $charactersLength = strlen($characters);
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $characters[random_int(0, $charactersLength - 1)];
+    }
+
+    return $password;
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,22 +33,32 @@
                 Strong Password Generator
             </h1>
 
-            <form action="password-generation.php">
+            <form method="GET" action="index.php">
                 <div class="mb-3">
                 <label for="password-length" class="form-label">Numero di caratteri</label>
                 <input 
                 type="number" 
                 class="form-control" 
-                id="password-length" 
+                id="password-length"
+                name="password-length"
                 aria-describedby="pwHelp"
                 min="4"
-                max="16">
+                max="16"
+                value="<?php echo $passwordLength ?>">
                 
                 <div id="pwHelp" class="form-text">Verrà generata una password con il numero di caratteri richiesti</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Genera</button>
             </form>
 
+            <div class="mt-5">
+                <h2 class="fs-5 mb-5">Password</h2>
+                <span class="p-3 rounded-3 border border-white bg-primary-subtle">
+                <?php
+                echo passwordGeneration($passwordLength);
+                ?>
+                </span>
+            </div>
     </div>
     
     <!-- bootstrap -->
